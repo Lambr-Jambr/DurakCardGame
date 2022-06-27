@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32317.152
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Durak_BL", "Durak_BL\Durak_BL.csproj", "{8DDD6E53-8886-4CC7-BEDB-96B7FA02F57C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{5060AF74-BF95-4BC5-9C5B-4E17C92D3CA1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8DDD6E53-8886-4CC7-BEDB-96B7FA02F57C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DDD6E53-8886-4CC7-BEDB-96B7FA02F57C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DDD6E53-8886-4CC7-BEDB-96B7FA02F57C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DDD6E53-8886-4CC7-BEDB-96B7FA02F57C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5060AF74-BF95-4BC5-9C5B-4E17C92D3CA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5060AF74-BF95-4BC5-9C5B-4E17C92D3CA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5060AF74-BF95-4BC5-9C5B-4E17C92D3CA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5060AF74-BF95-4BC5-9C5B-4E17C92D3CA1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {306340C4-535F-458C-9D47-79DE7CC50EB5}
+	EndGlobalSection
+EndGlobal
