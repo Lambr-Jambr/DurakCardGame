@@ -15,11 +15,11 @@ namespace Durak_BL.Model
 
         public Card(int suit, int rank, bool isTrump)
         {
-            if (suit < 0 && suit > 3)
+            if (suit < 0 || suit > 3)
             {
                 throw new ArgumentException("Недопустимое значение", nameof(suit));
             }
-            if (rank < 6 && rank > 14)
+            if (rank < 6 || rank > 14)
             {
                 throw new ArgumentException("Недопустимое значение", nameof(rank));
             }
@@ -82,9 +82,9 @@ namespace Durak_BL.Model
         }
 
         public static bool operator ==(Card firstCard, Card secondCard) =>
-            true ? (firstCard.Suit == secondCard.Suit) : false;
+            true ? (firstCard.Rank == secondCard.Rank && firstCard.Suit == secondCard.Suit) : false;
         public static bool operator !=(Card firstCard, Card secondCard) =>
-            true ? (firstCard.Suit != secondCard.Suit) : false;
+            true ? (firstCard.Rank != secondCard.Rank || firstCard.Suit != secondCard.Suit) : false;
 
         public override bool Equals(object obj)
         {
