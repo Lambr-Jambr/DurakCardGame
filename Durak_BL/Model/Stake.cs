@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Durak_BL.Model
 {
-    public class Game
+    public class Stake
     {
         public int AttackingPlayerIndex { get; }
         public int DefendingPlayerIndex { get; }
         public List<int> AllowThrow { get; }
 
-        public Game(int defendingPlayerIndex, int PlayersCount)
+        public Stake(int defendingPlayerIndex, int PlayersCount)
         {
             AllowThrow = new List<int>();
             DefendingPlayerIndex = defendingPlayerIndex;

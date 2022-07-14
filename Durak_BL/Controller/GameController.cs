@@ -9,6 +9,7 @@ namespace Durak_BL.Controller
 {
     public class GameController
     {
+        public Stake stake { get; private set; }
         public Dictionary<Card, Card> Table { get; }
         public PackController PackController { get; private set; }
         public List<PlayerController> Players { get; } 
@@ -21,15 +22,9 @@ namespace Durak_BL.Controller
             PackController = new PackController(Players);
         }
 
-        public GameController()
+        public void StakeUpdate()
         {
-            Table = new Dictionary<Card, Card>();
-            PackController = new PackController(Players);
-        }
-
-        public void Step()
-        {
-
+            stake = new Stake(CurrentPlayerIndex, Players.Count);
         }
 
         public void HandTableCards()
