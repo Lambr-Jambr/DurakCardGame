@@ -54,7 +54,7 @@ namespace Durak_BL.Controller
             return allowCovering;
         }
 
-        public void TransferCard(ref Dictionary<Card, Card> table, Card transferingCard, Player nextPlayer)
+        public void TransferCard(Dictionary<Card, Card> table, Card transferingCard, Player nextPlayer)
         {
             foreach (var card in table.Values)
             {

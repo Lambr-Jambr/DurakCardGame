@@ -11,6 +11,7 @@ namespace Durak_BL.Controller
 
         private List<Card>[] DealedCards;
         public Pack Pack { get; }
+        public int FirstStepIndex { get; }
 
         public PackController(List<PlayerController> players)
         {
@@ -18,9 +19,9 @@ namespace Durak_BL.Controller
             {
                 throw new ArgumentException("Недопустимое количество игроков.", nameof(players.Count));
             }
-            DealedCards = new List<Card>[players.Count];
             Pack = new Pack(GenerateCards());
             Start_DealCards(players.Count);
+            FirstStepIndex = CheckForFirstStep();
 
             for(int i = 0; i < players.Count; i++)
             {
@@ -28,6 +29,10 @@ namespace Durak_BL.Controller
             }
         }
 
+        /// <summary>
+        /// Generate pack of cards and shuffles them.
+        /// </summary>
+        /// <returns></returns>
         private List<Card> GenerateCards()
         {
             int index;
@@ -49,6 +54,10 @@ namespace Durak_BL.Controller
             return CardsForDeal;
         }
 
+        /// <summary>
+        /// Distribution of cards to players.
+        /// </summary>
+        /// <param name="playersCount"></param>
         private void Start_DealCards(int playersCount)
         {
             DealedCards = new List<Card>[playersCount];
@@ -65,6 +74,29 @@ namespace Durak_BL.Controller
                     Pack.Cards.RemoveAt(cardInd);
                 }
             }
+        }
+
+        private int CheckForFirstStep()
+        {
+            Card minCard = new Card(Pack.TrumpSuit, (int)CardRank.Ace, true);
+            foreach (var cards in DealedCards)
+            {
+                foreach (var card in cards)
+                {
+                    if (card < minCard && card.IsTrump)
+                        minCard = card;
+                }
+            }
+
+            for (int i = 0; i < DealedCards.Length; i++)
+            {
+                if (DealedCards[i].Contains(minCard))
+                {
+                    return i;
+                }
+            }
+
+            return -1;
         }
     }
 }

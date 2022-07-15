@@ -15,7 +15,12 @@ namespace Durak_BL.Model
         public Stake(int defendingPlayerIndex, int PlayersCount)
         {
             AllowThrow = new List<int>();
-            DefendingPlayerIndex = defendingPlayerIndex;
+
+            if (defendingPlayerIndex >= PlayersCount)
+                DefendingPlayerIndex = defendingPlayerIndex - PlayersCount;
+            else
+                DefendingPlayerIndex = defendingPlayerIndex;
+
             if (defendingPlayerIndex == 0)
             {
                 AllowThrow.Add(AttackingPlayerIndex = PlayersCount - 1);
