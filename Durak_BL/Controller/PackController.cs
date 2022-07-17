@@ -13,6 +13,8 @@ namespace Durak_BL.Controller
         public Pack Pack { get; }
         public int FirstStepIndex { get; }
 
+        private List<int> PlayersForDeal;
+
         public PackController(List<PlayerController> players)
         {
             if(players.Count <= 1 || players.Count > 6)
@@ -74,6 +76,32 @@ namespace Durak_BL.Controller
                     Pack.Cards.RemoveAt(cardInd);
                 }
             }
+        }
+
+        public void DealCards(List<PlayerController> players, Stake stake)
+        {
+            if(Pack.Cards.Count == 0) return;
+            PlayersForDeal = new List<int>();
+            PlayersForDeal.Add(stake.AttackingPlayerIndex);
+            PlayersForDeal.Add(stake.DefendingPlayerIndex);
+            PlayersForDeal.Add(stake.AllowThrow[stake.AllowThrow.Count - 1]);
+
+            for(int i = 0; i < players.Count; i++)
+            {
+                if (!PlayersForDeal.Contains(i))
+                    PlayersForDeal.Add(i);
+            }
+
+            for(int i = 0; i < PlayersForDeal.Count; i++)
+            {
+                while (players[PlayersForDeal[i]].Player.Cards.Count < 6)
+                {
+                    players[PlayersForDeal[i]].Player.Cards.Add(Pack.Cards[Pack.Cards.Count - 1]);
+                    Pack.Cards.RemoveAt(Pack.Cards.Count - 1);
+                    if (Pack.Cards.Count == 0) return;
+                }
+            }
+
         }
 
         private int CheckForFirstStep()

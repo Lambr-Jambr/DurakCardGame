@@ -26,4 +26,12 @@
         King = 13,
         Ace = 14,
     }
+
+    public enum StakeResult
+    {
+        Default = 0,
+        Beat = 1,
+        Hand = 2,
+        Transfer = 3
+    }
 }

@@ -1,4 +1,5 @@
-﻿using Durak_BL.Model;
+﻿using Durak_BL.Enums;
+using Durak_BL.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +14,8 @@ namespace Durak_BL.Controller
         public Dictionary<Card, Card> Table { get; }
         public PackController PackController { get; private set; }
         public List<PlayerController> Players { get; } 
-        public int StakeResult { get; private set; }
+        public int _stakeResult { get; private set; }
         public int CurrentPlayerIndex { get; private set; }
-
-        /*
-        0 - default
-        1 - current player covered cards
-        2 - current player handed cards
-        3 - current player transfered card
-        */
 
         public GameController(ref List<PlayerController> players)
         {
@@ -29,41 +23,43 @@ namespace Durak_BL.Controller
             Players = players;
             PackController = new PackController(Players);
             CurrentPlayerIndex = PackController.FirstStepIndex;
-            StakeResult = 0;
+            _stakeResult = 0;
         }
 
         private void StakeUpdate()
         {
-            switch (StakeResult)
+            switch (_stakeResult)
             {
-                case 1:
+                case (int)StakeResult.Beat:
                     stake = new Stake(CurrentPlayerIndex + 1, Players.Count);
                     break;
 
-                case 2:
+                case (int)StakeResult.Hand:
                     stake = new Stake(CurrentPlayerIndex + 2, Players.Count);
                     break;
 
-                case 3:
+                case (int)StakeResult.Transfer:
                     stake = new Stake(CurrentPlayerIndex + 1, Players.Count);
                     break;
             }
             CurrentPlayerIndex = stake.DefendingPlayerIndex;
-            StakeResult = 0;
+            _stakeResult = 0;
         }
 
         public void HandTableCards()
         {
             Players[CurrentPlayerIndex].HandCards(Table);
             Table.Clear();
-            StakeResult = 2;
+            PackController.DealCards(Players, stake);
+            _stakeResult = (int)StakeResult.Hand;
             StakeUpdate();
         }
 
         public void Beat()
         {
             Table.Clear();
-            StakeResult = 1;
+            PackController.DealCards(Players, stake);
+            _stakeResult = (int)StakeResult.Beat;
             StakeUpdate();
         }
 
@@ -76,7 +72,7 @@ namespace Durak_BL.Controller
                 nextPlayer = CurrentPlayerIndex + 1;
 
             Players[CurrentPlayerIndex].TransferCard(Table, Table.Keys.ToList()[0], Players[nextPlayer].Player);
-            StakeResult = 3;
+            _stakeResult = (int)StakeResult.Transfer;
             StakeUpdate();
         }
 
