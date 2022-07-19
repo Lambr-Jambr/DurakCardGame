@@ -76,5 +76,36 @@ namespace Durak_BL.Controller
             StakeUpdate();
         }
 
+
+        public void BeatCard(int cardIndex, Card coveringCard)
+        {
+            if (cardIndex >= Table.Count) return;
+            else if (Table[Table.Keys.ToList()[cardIndex]] != GlobalVar.Global.DefaultCard) return;
+
+            Players[CurrentPlayerIndex].BeatCard(coveringCard, Table.Keys.ToList()[cardIndex], Table);
+        }
+
+        public void PlayerStep(int CardsIndex)
+        {
+            Players[CurrentPlayerIndex].Step(Table, Players[CurrentPlayerIndex].Player.Cards[CardsIndex]);
+        }
+
+        public int CheckGameStatus()
+        {
+            int checkRes = 0;
+            int counter = 0;
+            for(int i = 0; i < Players.Count; i++)
+            {
+                if (Players[i].Player.Cards.Count == 0)
+                {
+                    counter++;
+                    checkRes = i;
+                }
+            }
+
+            if (counter > 1) checkRes = -1;
+
+            return checkRes;
+        }
     }
 }

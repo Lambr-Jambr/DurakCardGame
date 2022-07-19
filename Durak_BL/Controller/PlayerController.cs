@@ -37,7 +37,7 @@ namespace Durak_BL.Controller
             table.Clear();
         }
 
-        public bool BeatCard(Card CoveringCard, Card CoveredCard, ref Dictionary<Card, Card> table)
+        public bool BeatCard(Card CoveringCard, Card CoveredCard, Dictionary<Card, Card> table)
         {
             var allowCovering = false;
             if (table == null || table.Count == 0)
@@ -66,19 +66,19 @@ namespace Durak_BL.Controller
 
             if (transferingCard.Rank == table.Keys.ToList()[0].Rank)
             {
-                Step(ref table, transferingCard);
+                Step(table, transferingCard);
             }
         }
 
-        public void ThrowCard(ref Dictionary<Card, Card> table, Card card)
+        public void ThrowCard(Dictionary<Card, Card> table, Card card)
         {
             if (AllowThrowCard(ref table, card))
             {
-                Step(ref table, card);
+                Step(table, card);
             }
         }
 
-        public void Step(ref Dictionary<Card, Card> table, Card card)
+        public void Step(Dictionary<Card, Card> table, Card card)
         {
                 table.Add(card, Global.DefaultCard);
                 Player.Cards.Remove(card);

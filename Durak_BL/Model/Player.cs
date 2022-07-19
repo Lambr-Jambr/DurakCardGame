@@ -9,6 +9,7 @@ namespace Durak_BL.Model
     public class Player
     {
         public string Name { get; }
+        public int Index { get; private set; }
         public List<Card> Cards { get; set; }
         public bool IsPlaying { get; set; }
 
@@ -21,6 +22,11 @@ namespace Durak_BL.Model
             Name = name;
             Cards = new List<Card>();
             IsPlaying = false;
+        }
+
+        public void SetIndex(int index)
+        {
+            Index = index;
         }
 
         public Player(string name, ref Card[] cards)
